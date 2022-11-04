@@ -69,10 +69,43 @@ function FakeArray(...elements) {
       }
       return this
     }
+
+
+    // this.includes = function(param){
+    //   this.forEach(function(element)  {
+    //     if (element === param ){
+
+    //       return true
+    //      } else {
+    //       return false
+    //      }
+    //   });
+       
+
+    
+    // }
+
+    this.includes = function(param){
+      let count = 0 
+      this.forEach(function(element) {
+        if (element === param ){
+
+           count ++
+         }
+        
+      });
+       
+      if (count > 0){
+        return true
+      } else{
+        return false
+      }
+    
+    }
     
   }
   
-   let instructors = new FakeArray("Diego", "Andre", "Paulo", "Martha", "Arnold", "Wences","Catode" )
+   let instructors = new FakeArray("Diego", "Andre", "Paulo", "Martha", "Arnold", "Wences","Catode","Juan","Pepe" )
   //this = {
   //   0: "Diego",
   //   1: "Andre",
@@ -80,7 +113,8 @@ function FakeArray(...elements) {
   //   length: 3  <-- this.length
   // }
   
-  // let arr = ["Diego", "Andre", "Paulo","Juan","Miguel","Pepe"]
+   let arr1 = ["Diego", "Andre", "Paulo","Juan","Miguel","Pepe"]
  
   /* Voy a ir mandando cada elemento al final hasta que el ultimo elemento sea el primero
   */
+ 
