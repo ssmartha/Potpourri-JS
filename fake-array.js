@@ -52,9 +52,27 @@ function FakeArray(...elements) {
     return word
     }
 
+
+    this.reverse = function (){
+      let arr = []
+      // console.log(`Array(${this.length})`)
+      // console.log(this)
+      for (let index = (this.length -1) ; index >= 0 ; index --){
+        
+       arr.push(this[index])
+      }
+      
+      
+      
+      for (let index = 0 ; index < this.length ; index ++){
+        this[index] = arr[index]
+      }
+      return this
+    }
+    
   }
   
-   let instructors = new FakeArray("Diego", "Andre", "Paulo")
+   let instructors = new FakeArray("Diego", "Andre", "Paulo", "Martha", "Arnold", "Wences","Catode" )
   //this = {
   //   0: "Diego",
   //   1: "Andre",
@@ -62,4 +80,7 @@ function FakeArray(...elements) {
   //   length: 3  <-- this.length
   // }
   
-  let arr = ["Diego", "Andre", "Paulo"]
+  // let arr = ["Diego", "Andre", "Paulo","Juan","Miguel","Pepe"]
+ 
+  /* Voy a ir mandando cada elemento al final hasta que el ultimo elemento sea el primero
+  */
