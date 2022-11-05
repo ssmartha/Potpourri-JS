@@ -167,12 +167,25 @@ function FakeArray(...elements) {
     
     }
     
+    this.find = function(callback){
+       let object = -1
+      this.forEach(function(element) {
+        if (callback(element)){
+  
+         object = element
+         
+        }   
+      })
+      
+      return object  
+    }
   }
-}
+
 
 instructors = new FakeArray("Diego", "Andre", "Paulo")
 // instructorsAge = new FakeArray(20, 25, 30)
 const isBelowThreshold = (currentValue) => typeof currentValue === "string";
+const findTest = (currentValue) => typeof currentValue === "string";
 instructors = new FakeArray("Diego", "Andre", "Paulo")
 instructors2 = new FakeArray("Peter", "SebasTerle", "Catodiux")
 //this = {
