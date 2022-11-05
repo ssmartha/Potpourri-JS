@@ -11,6 +11,13 @@ function FakeArray(...elements) {
     this.length++;
     return newElement;
   };
+  
+  this.pop = function () {
+        let deletedElement = this[this.length-1];
+        delete this[this.length-1];
+        this.length--;
+        return deletedElement;
+  };
 
   this.forEach = function (callback) {
     for (let index = 0; index < this.length; index++) {
@@ -67,14 +74,116 @@ function FakeArray(...elements) {
     console.log(deleted)
     return cloneElement
   }
+  
+  this.concat = function (otherArray) {
+        const concattedArray = new FakeArray()
+        for (let index = 0; index < this.length; index++) {
+            concattedArray.push(this[index]);
+        }
+        for (let index = 0; index < this.length; index++) {
+            concattedArray.push(otherArray[index]);
+        }
+        return concattedArray;
+      };
+
+    this.some = function (callback) {
+        let count = 0
+        for (let index = 0; index < this.length; index++) {
+            if (callback(this[index])) {
+                count++;
+            }   
+        } 
+        if (count > 0) {
+            return true
+        } else {
+            return false
+        }
+      };
+    
+    this.every = function (callback) {
+        let count = 0
+        for (let index = 0; index < this.length; index++) {
+            if (callback(this[index])) {
+                count++;
+            }   
+        } 
+        if (count === this.length) {
+            return true
+        } else {
+            return false
+        }
+      };
+      
+       this.join = function (param){
+    if(param === undefined){
+      param = ","
+    } 
+    let word = "";
+    for (let index = 0; index < this.length; index++) {
+      if (word === "") {
+        word += this[index]
+        } else {
+        word += param + this[index] 
+        }
+      
+    }
+    return word
+    };
+
+
+    this.reverse = function (){
+      let arr = []
+      // console.log(`Array(${this.length})`)
+      // console.log(this)
+      for (let index = (this.length -1) ; index >= 0 ; index --){
+        
+       arr.push(this[index])
+      }
+      
+      
+      
+      for (let index = 0 ; index < this.length ; index ++){
+        this[index] = arr[index]
+      }
+      return this
+    };
+    
+    
+    this.includes = function(param){
+      let count = 0 
+      this.forEach(function(element) {
+        if (element === param ){
+
+           count ++
+         }
+        
+      });
+       
+      if (count > 0){
+        return true
+      } else{
+        return false
+      }
+    
+    }
+    
+  }
 }
 
 instructors = new FakeArray("Diego", "Andre", "Paulo")
 // instructorsAge = new FakeArray(20, 25, 30)
-
+const isBelowThreshold = (currentValue) => typeof currentValue === "string";
+instructors = new FakeArray("Diego", "Andre", "Paulo")
+instructors2 = new FakeArray("Peter", "SebasTerle", "Catodiux")
 //this = {
 //   0: "Diego",
 //   1: "Andre",
 //   2: "Paulo"
 //   length: 3  <-- this.length
 // }
+   
+
+
+  
+ 
+
