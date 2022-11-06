@@ -16,10 +16,10 @@ function Formatter(baseNumber,[unit,ten,hundred]){
     this.unit = unit;
     this.ten = ten;
     this.hundred = hundred;
-
+    
     this.dataFormatter = function (number){
         
-        console.log(`${number}`.length)
+        
         if(number<baseNumber){
           console.log(number + unit)
         }
@@ -33,22 +33,35 @@ function Formatter(baseNumber,[unit,ten,hundred]){
         }
         }
         
+        this.massFormatter = function (number){
         
+            console.log(`${number}`.length)
+            if(number<baseNumber){
+              console.log(number + unit)
+            }
+              else if(`${number}`.length === 8){
+              let convertedNum =  number/(baseNumber*baseNumber)
+                console.log(Math.floor(convertedNum) + hundred)
+              }
+              else {
+                let convertedNum =  number/(baseNumber)
+                console.log(Math.floor(convertedNum) + ten)
+            }
+            }
 
 }
 
 
         
 // console.log(`$(num)`.length + 1 )
-    let dataFormatter = new Formatter(1024,["b","Kb","Mb"])
-    dataFormatter.dataFormatter(10000)
+    let obj = new Formatter(1024,["b","Kb","Mb"])
+    let obj2 = new Formatter(1000,["g","Kg"])
+    // obj.dataFormatter(10000)
+    obj2.massFormatter(100080)
     
     
     
-    // function massFormatter(number){
-    
-    
-    // }
+     
     
     
     
