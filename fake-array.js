@@ -11,7 +11,7 @@ function FakeArray(...elements) {
     this.length++;
     return newElement;
   };
-  
+
   this.pop = function () {
         let deletedElement = this[this.length-1];
         delete this[this.length-1];
@@ -60,21 +60,38 @@ function FakeArray(...elements) {
   this.filter = function (callback) {
     let filterArray=[]
     for (let index = 0; index < this.length; index++){
-      // console.log(this[index])
-      // console.log(callback(this[index]))
       if (callback(this[index])) filterArray.push(this[index]);
     }
     return filterArray
   }
 
   this.shift = function () {
-    const cloneElement = structuredClone(elements);
-    // sacarlo & eliminarlo
-    const deleted = delete cloneElement[0]
-    console.log(deleted)
-    return cloneElement
+    let cloneElement = Array.from(this);
+    let firstElement = cloneElement[0];
+    delete firstElement;
+
+    for (let pos = 0; pos <= this.length; pos++){
+      this[pos] = cloneElement[pos + 1];
+      if (this[pos]==undefined) delete this[pos]
+    }
   }
-  
+
+  this.unshift = function (...elements) {
+    let cloneElement = Array.from(this);
+
+    for (let pos = 0; pos < this.length; pos++){
+      this[pos+elements.length] = cloneElement[pos];
+    }
+
+    for (let pos = 0; pos < elements.length; pos++){
+      this[pos] = elements[pos];
+      this.length++;
+    }
+
+    console.log(this);
+    return elements[elements.length-1];
+  }
+
   this.concat = function (otherArray) {
         const concattedArray = new FakeArray()
         for (let index = 0; index < this.length; index++) {
@@ -91,41 +108,41 @@ function FakeArray(...elements) {
         for (let index = 0; index < this.length; index++) {
             if (callback(this[index])) {
                 count++;
-            }   
-        } 
+            }
+        }
         if (count > 0) {
             return true
         } else {
             return false
         }
       };
-    
+
     this.every = function (callback) {
         let count = 0
         for (let index = 0; index < this.length; index++) {
             if (callback(this[index])) {
                 count++;
-            }   
-        } 
+            }
+        }
         if (count === this.length) {
             return true
         } else {
             return false
         }
       };
-      
+
        this.join = function (param){
     if(param === undefined){
       param = ","
-    } 
+    }
     let word = "";
     for (let index = 0; index < this.length; index++) {
       if (word === "") {
         word += this[index]
         } else {
-        word += param + this[index] 
+        word += param + this[index]
         }
-      
+
     }
     return word
     };
@@ -136,48 +153,48 @@ function FakeArray(...elements) {
       // console.log(`Array(${this.length})`)
       // console.log(this)
       for (let index = (this.length -1) ; index >= 0 ; index --){
-        
+
        arr.push(this[index])
       }
-      
-      
-      
+
+
+
       for (let index = 0 ; index < this.length ; index ++){
         this[index] = arr[index]
       }
       return this
     };
-    
-    
+
+
     this.includes = function(param){
-      let count = 0 
+      let count = 0
       this.forEach(function(element) {
         if (element === param ){
 
            count ++
          }
-        
+
       });
-       
+
       if (count > 0){
         return true
       } else{
         return false
       }
-    
+
     }
-    
+
     this.find = function(callback){
        let object = -1
       this.forEach(function(element) {
         if (callback(element)){
-  
+
          object = element
-         
-        }   
+
+        }
       })
-      
-      return object  
+
+      return object
     }
   }
 
@@ -194,9 +211,9 @@ instructors2 = new FakeArray("Peter", "SebasTerle", "Catodiux")
 //   2: "Paulo"
 //   length: 3  <-- this.length
 // }
-   
 
 
-  
- 
+
+
+
 
